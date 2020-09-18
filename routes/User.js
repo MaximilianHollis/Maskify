@@ -5,6 +5,9 @@ const passportConfig = require('../passport');
 const JWT = require('jsonwebtoken');
 const User = require('../models/User');
 const Todo = require('../models/Todo');
+var cors = require('cors')
+
+userRouter.use(cors({origin: 'http://localhost:3000'}));
 
 
 const signToken = userID =>{
@@ -17,10 +20,12 @@ const signToken = userID =>{
 userRouter.post('/register',(req,res)=>{
     const { username,password,role } = req.body;
     User.findOne({username},(err,user)=>{
-        if(err)
+        if(err){
             res.status(500).json({message : {msgBody : "Error has occured", msgError: true}});
-        if(user)
+        }
+        if(user){
             res.status(400).json({message : {msgBody : "Username is already taken", msgError: true}});
+        }
         else{
             const newUser = new User({username,password,role});
             newUser.save(err=>{
@@ -66,8 +71,10 @@ userRouter.post('/todo',passport.authenticate('jwt',{session : false}),(req,res)
 
 userRouter.get('/todos',passport.authenticate('jwt',{session : false}),(req,res)=>{
     User.findById({_id : req.user._id}).populate('todos').exec((err,document)=>{
-        if(err)
+        if(err){
             res.status(500).json({message : {msgBody : "Error has occured", msgError: true}});
+            console.log("rip")
+        }
         else{
             res.status(200).json({todos : document.todos, authenticated : true});
         }
