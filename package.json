@@ -20,6 +20,7 @@
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.5",
     "nodemon": "^2.0.4",
+    "nookies": "^2.4.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0"

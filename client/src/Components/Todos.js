@@ -50,9 +50,11 @@ const Todos = props =>{
         <div>
             <ul className="list-group">
                 {
+                    todos ?
                     todos.map(todo =>{
                         return <TodoItem key={todo._id} todo={todo}/>
-                    })
+                    }): 
+                    (<p>nothing</p>)
                 }
             </ul>
             <br/>

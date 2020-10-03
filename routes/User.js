@@ -42,7 +42,10 @@ userRouter.post('/login',passport.authenticate('local',{session : false}),(req,r
     if(req.isAuthenticated()){
        const {_id,username,role} = req.user;
        const token = signToken(_id);
-       res.cookie('access_token',token,{httpOnly: true, sameSite:true}); 
+       //for prod, make the cookies secure, and change the domain OR ELSE!!!!!
+       //res.cookie('access_token',token,{secure: false, sameSite: 'strict', path:'/'}); 
+       //convert to nextjs api routes :)
+       res.setHeader('set-cookie', `access_token=${token}`)
        res.status(200).json({isAuthenticated : true,user : {username,role}});
     }
 });
@@ -73,7 +76,6 @@ userRouter.get('/todos',passport.authenticate('jwt',{session : false}),(req,res)
     User.findById({_id : req.user._id}).populate('todos').exec((err,document)=>{
         if(err){
             res.status(500).json({message : {msgBody : "Error has occured", msgError: true}});
-            console.log("rip")
         }
         else{
             res.status(200).json({todos : document.todos, authenticated : true});
@@ -93,9 +95,6 @@ userRouter.get('/authenticated',passport.authenticate('jwt',{session : false}),(
     const {username,role} = req.user;
     res.status(200).json({isAuthenticated : true, user : {username,role}});
 });
-
-
-
 
 
 module.exports = userRouter;
