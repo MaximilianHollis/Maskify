@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FaMagento } from 'react-icons/fa';
+import { RiSurgicalMaskLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { Container } from '../../globalStyles';
 
@@ -32,8 +32,10 @@ export const NavLogo = styled(Link)`
   align-items: center;
 `;
 
-export const NavIcon = styled(FaMagento)`
+export const NavIcon = styled(RiSurgicalMaskLine)`
   margin-right: 0.5rem;
+  height: 40px;
+  width: 32px;
 `;
 
 export const MobileIcon = styled.div`

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Section } from '../Universal.elements'
+import { Section } from '../../globalStyles'
 
 export const InfoSec = styled(Section)`
 `;

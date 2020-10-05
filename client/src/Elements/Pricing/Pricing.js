@@ -3,6 +3,7 @@ import { Button } from '../../globalStyles';
 import { GiCrystalBars } from 'react-icons/gi';
 import { GiCutDiamond, GiRock } from 'react-icons/gi';
 import { IconContext } from 'react-icons/lib';
+import { Bold } from '../../globalStyles'
 import {
   PricingSection,
   PricingWrapper,
@@ -15,7 +16,7 @@ import {
   PricingCardCost,
   PricingCardLength,
   PricingCardFeatures,
-  PricingCardFeature,
+  PricingCardFeature
 } from './Pricing.elements';
 
 export default function Pricing() {
@@ -30,13 +31,13 @@ export default function Pricing() {
                 <PricingCardIcon>
                   <GiRock />
                 </PricingCardIcon>
-                <PricingCardPlan>Starter Pack</PricingCardPlan>
-                <PricingCardCost>$99.99</PricingCardCost>
-                <PricingCardLength>per month</PricingCardLength>
+                <PricingCardPlan>Basic</PricingCardPlan>
+                <PricingCardCost>$10.00</PricingCardCost>
+                <PricingCardLength>per month, first month free</PricingCardLength>
                 <PricingCardFeatures>
-                  <PricingCardFeature>100 New Users</PricingCardFeature>
-                  <PricingCardFeature>$10,000 Budget</PricingCardFeature>
-                  <PricingCardFeature>Retargeting analytics</PricingCardFeature>
+                  <PricingCardFeature>Local data</PricingCardFeature>
+                  <PricingCardFeature>Updated weekly</PricingCardFeature>
+                  <PricingCardFeature>Basic analytics</PricingCardFeature>
                 </PricingCardFeatures>
                 <Button primary>Choose Plan</Button>
               </PricingCardInfo>
@@ -46,13 +47,13 @@ export default function Pricing() {
                 <PricingCardIcon>
                   <GiCrystalBars />
                 </PricingCardIcon>
-                <PricingCardPlan>Gold Rush</PricingCardPlan>
-                <PricingCardCost>$299.99</PricingCardCost>
+                <PricingCardPlan>Premium</PricingCardPlan>
+                <PricingCardCost>$50.00</PricingCardCost>
                 <PricingCardLength>per month</PricingCardLength>
                 <PricingCardFeatures>
-                  <PricingCardFeature>1000 New Users</PricingCardFeature>
-                  <PricingCardFeature>$50,000 Budget</PricingCardFeature>
-                  <PricingCardFeature>Lead Gen Analytics</PricingCardFeature>
+                  <PricingCardFeature><Bold>National data</Bold></PricingCardFeature>
+                  <PricingCardFeature>Updated daily</PricingCardFeature>
+                  <PricingCardFeature>Next Gen Analytics</PricingCardFeature>
                 </PricingCardFeatures>
                 <Button primary>Choose Plan</Button>
               </PricingCardInfo>
@@ -62,12 +63,12 @@ export default function Pricing() {
                 <PricingCardIcon>
                   <GiCutDiamond />
                 </PricingCardIcon>
-                <PricingCardPlan>Diamond Kings</PricingCardPlan>
-                <PricingCardCost>$999.99</PricingCardCost>
+                <PricingCardPlan>Enterprise</PricingCardPlan>
+                <PricingCardCost>$100.00</PricingCardCost>
                 <PricingCardLength>per month</PricingCardLength>
                 <PricingCardFeatures>
-                  <PricingCardFeature>Unlimited Users</PricingCardFeature>
-                  <PricingCardFeature>Unlimited Budget</PricingCardFeature>
+                  <PricingCardFeature>National data</PricingCardFeature>
+                  <PricingCardFeature>Realtime analytics and data</PricingCardFeature>
                   <PricingCardFeature>24/7 Support</PricingCardFeature>
                 </PricingCardFeatures>
                 <Button primary>Choose Plan</Button>

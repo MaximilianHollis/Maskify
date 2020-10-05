@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Button } from '../../globalStyles';
+import { Container, Button,  Img, ImgWrapper } from '../../globalStyles';
 import {
   InfoSec,
   InfoRow,
@@ -10,10 +10,6 @@ import {
   Heading,
   Subtitle,
 } from './InfoSection.elements';
-import {
-  Img,
-  ImgWrapper
-} from '../Universal.elements';
 
 export default function InfoSection({
   primary,
@@ -42,7 +38,7 @@ export default function InfoSection({
                 <TopLine lightTopLine={lightTopLine}>{topLine}</TopLine>
                 <Heading lightText={lightText}>{headline}</Heading>
                 <Subtitle lightTextDesc={lightTextDesc}>{description}</Subtitle>
-                <Link to='/sign-up'>
+                <Link to='/register'>
                   <Button big fontBig primary={primary}>
                     {buttonLabel}
                   </Button>

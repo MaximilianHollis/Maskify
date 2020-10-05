@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { IconContext } from 'react-icons/lib';
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AuthService from '../../Services/AuthService';
 import { AuthContext } from '../../Context/AuthContext';
 import { Button } from '../../globalStyles';
@@ -18,6 +18,7 @@ import {
     NavLinks,
     NavBtnLink
   } from './Navbar.elements';
+  
 const Navbar = props =>{
     const {isAuthenticated,user,setIsAuthenticated,setUser} = useContext(AuthContext);
     const [click, setClick] = useState(false);
@@ -52,21 +53,47 @@ const Navbar = props =>{
         return (
             <>
                 <IconContext.Provider value={{ color: '#fff' }}>
-                    <Link to="/">
-                        <li>
-                            Home
-                        </li>
-                    </Link>  
-                    <Link to="/login">
-                        <li>
-                            Login
-                        </li>
-                    </Link>  
-                    <Link to="/register">
-                        <li>
-                            Register
-                        </li>
-                    </Link>  
+                   <Nav>
+                       <NavbarContainer>
+                           <NavLogo to='/' onClick={closeMobileMenu}>
+                                <NavIcon />
+                                MASKIFY
+                           </NavLogo>
+                           <MobileIcon onClick={handleClick}>
+                                {click ? <FaTimes /> : <FaBars />}
+                          </MobileIcon>
+                          <NavMenu onClick={handleClick} click={click}>
+                              <NavItem>
+                                  <NavLinks to='/' onClick={closeMobileMenu}>
+                                      Home
+                                  </NavLinks>
+                              </NavItem>
+                              <NavItem>
+                                  <NavLinks to='/services' onClick={closeMobileMenu}>
+                                      Services
+                                  </NavLinks>
+                              </NavItem>
+                              <NavItem>
+                                  <NavLinks to='/login' onClick={closeMobileMenu}>
+                                      Login
+                                  </NavLinks>
+                              </NavItem>
+                              <NavItemBtn>
+                                {button ? (
+                                <NavBtnLink to='/register'>
+                                    <Button primary>SIGN UP</Button>
+                                </NavBtnLink>
+                                ) : (
+                                <NavBtnLink to='/register'>
+                                    <Button onClick={closeMobileMenu} fontBig primary>
+                                    SIGN UP
+                                    </Button>
+                                </NavBtnLink>
+                                )}
+                            </NavItemBtn>
+                          </NavMenu>
+                       </NavbarContainer>
+                   </Nav>
                 </IconContext.Provider>
             </>
         )
@@ -76,25 +103,44 @@ const Navbar = props =>{
         return(
             <>
                 <IconContext.Provider value={{ color: '#fff' }}>
-                    <Link to="/">
-                        <li>
-                            Home
-                        </li>
-                    </Link> 
-                    <Link to="/todos">
-                        <li>
-                            Todos
-                        </li>
-                    </Link> 
-                    {
-                        user.role === "admin" ? 
-                        <Link to="/admin">
-                            <li>
-                                Admin
-                            </li>
-                        </Link> : null
-                    }  
-                    <button type="button" onClick={onClickLogoutHandler}>Logout</button>
+                    <Nav>
+                        <NavbarContainer>
+                        <NavLogo to='/' onClick={closeMobileMenu}>
+                                <NavIcon />
+                                MASKIFY
+                           </NavLogo>
+                           <MobileIcon onClick={handleClick}>
+                                {click ? <FaTimes /> : <FaBars />}
+                          </MobileIcon>
+                          <NavMenu onClick={handleClick} click={click}>
+                              <NavItem>
+                                  <NavLinks to='/dashboard' onClick={closeMobileMenu}>
+                                      Dashboard
+                                  </NavLinks>
+                              </NavItem>
+                              <NavItem>
+                                  <NavLinks to='/todos' onClick={closeMobileMenu}>
+                                      Todos
+                                  </NavLinks>
+                              </NavItem>
+                              {
+                                user.role === "admin" ? 
+                                <NavItem>
+                                <NavLinks to='/admin' onClick={closeMobileMenu}>
+                                    Admin
+                                </NavLinks>
+                            </NavItem> : null
+                            }  
+                            <NavItem>
+                                  <NavLinks to='/' onClick={onClickLogoutHandler}>
+                                      Logout
+                                  </NavLinks>
+                              </NavItem>
+
+
+                            </NavMenu>
+                        </NavbarContainer>
+                    </Nav>
                 </IconContext.Provider>
 
             </>
@@ -102,9 +148,6 @@ const Navbar = props =>{
     }
     return(
         <nav>
-            <Link to="/">
-                <div className="navbar-brand">Maskify</div>
-            </Link>
             <div>
                 <ul>
                     { !isAuthenticated ? unauthenticatedNavBar() : authenticatedNavBar()}

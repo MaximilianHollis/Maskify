@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CardInfo, Card } from '../Universal.elements'
+import { CardInfo, Card } from '../../globalStyles'
 
 export const PricingSection = styled.div`
   padding: 100px 0 160px;
@@ -44,11 +44,9 @@ export const PricingContainer = styled.div`
 `;
 
 export const PricingCard = styled(Card)`
-  width: 280px;
+  width: 340px;
   height: 500px;
 `;
-
-
 
 export const PricingCardInfo = styled(CardInfo)`
 height: 500px;
@@ -80,6 +78,8 @@ flex-direction: column;
 align-items: center;
 color: #a9b3c1;
 `;
+
+
 
 export const PricingCardFeature = styled.li`
 margin-bottom: 10px;

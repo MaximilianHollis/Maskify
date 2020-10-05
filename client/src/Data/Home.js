@@ -7,7 +7,7 @@ export const homeObjOne = {
   topLine: 'Maskify',
   headline: 'Accurate and Distributed Mask Data',
   description:
-    'We help leading get the data they need to make the decisions we need.',
+    'We help leaders get the data they need to make the decisions we need.',
   buttonLabel: 'Get Started',
   imgStart: '',
   img: require('../images/maskify-landing.svg'),
