@@ -53,6 +53,7 @@ export const Button = styled.button`
 
 export const Bold = styled.p`
   font-weight: bold;
+  display: inline;
 `
 
 

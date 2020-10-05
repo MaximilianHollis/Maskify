@@ -24,9 +24,9 @@ export default function Pricing() {
     <IconContext.Provider value={{ color: '#a9b3c1', size: 64 }}>
       <PricingSection>
         <PricingWrapper>
-          <PricingHeading>Our Services</PricingHeading>
+          <PricingHeading>Our Plans</PricingHeading>
           <PricingContainer>
-            <PricingCard to='/sign-up'>
+            <PricingCard to='/register'>
               <PricingCardInfo>
                 <PricingCardIcon>
                   <GiRock />
@@ -42,7 +42,7 @@ export default function Pricing() {
                 <Button primary>Choose Plan</Button>
               </PricingCardInfo>
             </PricingCard>
-            <PricingCard to='/sign-up'>
+            <PricingCard to='/register'>
               <PricingCardInfo>
                 <PricingCardIcon>
                   <GiCrystalBars />
@@ -51,14 +51,14 @@ export default function Pricing() {
                 <PricingCardCost>$50.00</PricingCardCost>
                 <PricingCardLength>per month</PricingCardLength>
                 <PricingCardFeatures>
-                  <PricingCardFeature><Bold>National data</Bold></PricingCardFeature>
+                  <PricingCardFeature><Bold>National</Bold> data</PricingCardFeature>
                   <PricingCardFeature>Updated daily</PricingCardFeature>
                   <PricingCardFeature>Next Gen Analytics</PricingCardFeature>
                 </PricingCardFeatures>
                 <Button primary>Choose Plan</Button>
               </PricingCardInfo>
             </PricingCard>
-            <PricingCard to='/sign-up'>
+            <PricingCard to='/register'>
               <PricingCardInfo>
                 <PricingCardIcon>
                   <GiCutDiamond />
@@ -67,8 +67,8 @@ export default function Pricing() {
                 <PricingCardCost>$100.00</PricingCardCost>
                 <PricingCardLength>per month</PricingCardLength>
                 <PricingCardFeatures>
-                  <PricingCardFeature>National data</PricingCardFeature>
-                  <PricingCardFeature>Realtime analytics and data</PricingCardFeature>
+                  <PricingCardFeature><Bold>National</Bold> data</PricingCardFeature>
+                  <PricingCardFeature><Bold>Realtime</Bold> analytics and data</PricingCardFeature>
                   <PricingCardFeature>24/7 Support</PricingCardFeature>
                 </PricingCardFeatures>
                 <Button primary>Choose Plan</Button>

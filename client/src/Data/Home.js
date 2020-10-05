@@ -25,7 +25,7 @@ export const homeObjTwo = {
   topLine: 'Instant Setup',
   headline: 'Extremely quick onboarding process',
   description:
-    "Once you've joined, our team of specialist will reach out to you and get you set up in minutes.",
+    "Once you've joined, we'll walk you through all our services and get you set up in minutes.",
   buttonLabel: 'Learn More',
   imgStart: '',
   img: require('../images/svg-2.svg'),
@@ -40,11 +40,11 @@ export const homeObjThree = {
   lightTopLine: false,
   lightText: false,
   lightTextDesc: false,
-  topLine: 'Sarah Jeni',
+  topLine: 'Maskify Dashboard',
   headline:
-    'Ultra helped me increase my revenue by over 3X in less than 3 months!',
+    'Dashboard provides for all your data needs!',
   description:
-    "Their team is wonderful! I can't believe I didn't start working with them earlier.",
+    "Our Neural Engine processes over half a million photos daily. See what it can do for you.",
   buttonLabel: 'View Case Study',
   imgStart: 'start',
   img: require('../images/profile.jpg'),
@@ -62,7 +62,7 @@ export const homeObjFour = {
   topLine: 'Secure Database',
   headline: 'All your data is stored on our secure server',
   description:
-    'You will never have to worry about your information getting leaked. Our team of security experts will ensure your records are kept safe.',
+    'All our data is processed and stored on a reliable ubuntu server, secured by ssh authentication. Your records and data our safe with us.',
   buttonLabel: 'Sign Up Now',
   imgStart: 'start',
   img: require('../images/svg-3.svg'),
