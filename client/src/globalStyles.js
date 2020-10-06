@@ -98,7 +98,7 @@ export const Section = styled.div`
   color: #fff;
   padding: 160px 0;
   background: ${({ lightBg }) => (lightBg ? '#fff' : '#101522')};
-  background-Image: ${({ backgroundImg }) => (backgroundImg ? `url(${backgroundImg})` : null)};
+  background-image: ${({ backgroundImg }) => (backgroundImg ? `url(${backgroundImg})` : null)};
   background-position: center;
   background-size: auto;
   background-repeat: no-repeat;

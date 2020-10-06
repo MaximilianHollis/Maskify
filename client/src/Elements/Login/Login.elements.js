@@ -1,12 +1,32 @@
 import styled from 'styled-components';
-import { Section } from '../../globalStyles'
+import { Section, Container } from '../../globalStyles'
+import LoginImage from '../../images/login.svg'
+
+export const LoginWrapper = styled.div`
+  margin: 0;
+  padding: 0px;
+  background: #101522;
+`
+
+export const LoginContainer = styled(Container)`
+  @media screen and (max-width: 760px) {
+    padding-right: 5px;
+    padding-left: 5px;
+    background: #101522;
+  }
+`
 
 export const LoginSection = styled(Section)`
   background: #101522;
-  background-position: center;
+  height: calc(100vh - 80px);
+  background-position: left;
   background-size: auto;
   background-repeat: no-repeat;
-  height: calc(100vh - 80px);
+
+  @media screen and (min-width: 1060px) {
+    background-image: ${() => (true ? `url(${LoginImage})` : null)};
+    margin: 0 10%;
+}
 `;
 
 export const LoginRow = styled.div`
@@ -32,6 +52,10 @@ export const LoginColumn = styled.div`
     display: flex;
     justify-content: center;
   }
+
+  @media screen and (min-width: 1660px) {
+    transform: translate(240px, -20px);
+  }
 `;
 
 
@@ -46,11 +70,10 @@ export const LoginCard = styled.div`
   width: 95%;
   height: 500px;
 }
-
 ` 
 export const LoginCardHeader = styled.div`
-  height: 150px;
-  width: 450px;
+  max-height: 150px;
+  max-width: 450px;
   background: #4B59F7;
   border-radius: 40px;
   margin: auto;
@@ -72,3 +95,12 @@ export const LoginCardHeaderText = styled.div`
   font-size: 40px;
 
 `
+
+export const LoginFields = styled.div`
+  height: auto;
+  width: 100%;
+  padding: 0 50px;
+  font-size: 40px;
+`
+
+

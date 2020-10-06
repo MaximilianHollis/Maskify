@@ -1,10 +1,10 @@
-import React, {useState,useContext} from 'react';
+import React, {useState,useContext, useEffect} from 'react';
 import AuthService from '../../Services/AuthService';
-import Message from '../Message';
 import {AuthContext} from '../../Context/AuthContext';
 import { Link } from 'react-router-dom';
 import { Container, Button,  Img, ImgWrapper } from '../../globalStyles';
-import Form from '../Universal/Form'
+import Input from '../Universal/Input'
+import { useHistory } from "react-router-dom";
 
 import {
  LoginSection,
@@ -13,69 +13,71 @@ import {
  LoginCard,
  LoginCardHeader,
  LoginCardHeaderText,
+ LoginContainer,
+ LoginWrapper,
+ LoginFields,
 
 } from './Login.elements';
 
-const Login = props => {
-    const [user, setUser] = useState({username: "", password : ""});
-    const [message, setMessage] = useState(null);
+const Login = () => {
+    const [username, setUsername] = React.useState("");
+    const [password, setPassword] = React.useState("");
+
+    let history = useHistory();
+    
 
     const authContext = useContext(AuthContext);
 
-    const onChange = e =>{
-        setUser({...user, [e.target.name] : e.target.value});
-    }
 
+    
     const onSubmit = e =>{
         e.preventDefault();
-        AuthService.login(user).then(data => {
+        AuthService.login({username, password}).then(data => {
             console.log(data);
             const { isAuthenticated, user, message } = data;
             if(isAuthenticated){
                 authContext.setUser(user);
                 authContext.setIsAuthenticated(isAuthenticated);
-                props.history.push('/todos');
+                history.push('/todos');
             }
-            else
-                setMessage(message);
         });
     }
 
 
     return(
-        <>
-          <LoginSection >
-            <Container>
+        <LoginWrapper>
+          <LoginSection>
+            <LoginContainer>
               <LoginRow>
                <LoginColumn></LoginColumn>
                 <LoginColumn>
                   <LoginCard>
                     <LoginCardHeader><LoginCardHeaderText>Login</LoginCardHeaderText></LoginCardHeader>
-                    <Form />
+                      <LoginFields>
+                        <Input
+                        type="username"
+                        label="username"
+                        value={username}
+                        onChange={val => setUsername(val) }
+                      />
+                       <Input
+                        type="password"
+                        label="password"
+                        value={password}
+                        onChange={val => setPassword(val)}
+                      />
+                      </LoginFields>
+                    
                     <form onSubmit={onSubmit}>
-                        <h3>Please sign in</h3>
-                        <label htmlFor="username" className="sr-only">Username: </label>
-                        <input type="text" 
-                              name="username" 
-                              onChange={onChange} 
-                              className="form-control" 
-                              placeholder="Enter Username"/>
-                        <label htmlFor="password" className="sr-only">Password: </label>
-                        <input type="password" 
-                              name="password" 
-                              onChange={onChange} 
-                              className="form-control" 
-                              placeholder="Enter Password"/>
                         <button className="btn btn-lg btn-primary btn-block" 
                                 type="submit">Log in </button>
                     </form>
-                    {message ? <Message message={message}/> : null}
                   </LoginCard>
                 </LoginColumn>
               </LoginRow>
-            </Container>
+            </LoginContainer>
           </LoginSection>
-        </>
+        </LoginWrapper>
     )
 }
 
