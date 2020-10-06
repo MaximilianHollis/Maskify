@@ -65,11 +65,11 @@ export const LoginCard = styled.div`
   background: #fff;
   border-radius: 40px;
   box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
-  transform: translate(0px, -100px);
 
   @media screen and (max-width: 700px) {
   width: 95%;
   height: 500px;
+  transform: translate(0px, -100px);
 }
 ` 
 export const LoginCardHeader = styled.div`
