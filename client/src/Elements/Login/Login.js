@@ -1,8 +1,6 @@
 import React, {useState,useContext, useEffect} from 'react';
 import AuthService from '../../Services/AuthService';
 import {AuthContext} from '../../Context/AuthContext';
-import { Link } from 'react-router-dom';
-import { Container, Button,  Img, ImgWrapper } from '../../globalStyles';
 import Input from '../Universal/Input'
 import { useHistory } from "react-router-dom";
 
@@ -16,7 +14,7 @@ import {
  LoginContainer,
  LoginWrapper,
  LoginFields,
-
+ LoginButton,
 } from './Login.elements';
 
 const Login = () => {
@@ -52,7 +50,7 @@ const Login = () => {
                <LoginColumn></LoginColumn>
                 <LoginColumn>
                   <LoginCard>
-                    <LoginCardHeader><LoginCardHeaderText>Login</LoginCardHeaderText></LoginCardHeader>
+                    <LoginCardHeader><LoginCardHeaderText>Dashboard</LoginCardHeaderText></LoginCardHeader>
                       <LoginFields>
                         <Input
                         type="username"
@@ -66,12 +64,8 @@ const Login = () => {
                         value={password}
                         onChange={val => setPassword(val)}
                       />
+                        <LoginButton primary onClick={onSubmit}>Login</LoginButton>
                       </LoginFields>
-                    
-                    <form onSubmit={onSubmit}>
-                        <button className="btn btn-lg btn-primary btn-block" 
-                                type="submit">Log in </button>
-                    </form>
                   </LoginCard>
                 </LoginColumn>
               </LoginRow>

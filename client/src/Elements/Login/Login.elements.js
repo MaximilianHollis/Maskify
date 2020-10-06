@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Section, Container } from '../../globalStyles'
+import { Section, Container, Button } from '../../globalStyles'
 import LoginImage from '../../images/login.svg'
 
 export const LoginWrapper = styled.div`
@@ -102,5 +102,8 @@ export const LoginFields = styled.div`
   padding: 0 50px;
   font-size: 40px;
 `
+export const LoginButton = styled(Button)`
+  margin: 50px 0;
+  width: 100%;
 
-
+`
