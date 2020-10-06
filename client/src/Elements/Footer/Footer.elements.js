@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FaMagento } from 'react-icons/fa';
+import { RiSurgicalMaskLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 
 export const FooterContainer = styled.div`
@@ -144,8 +144,10 @@ export const SocialLogo = styled(Link)`
   margin-bottom: 16px;
 `;
 
-export const SocialIcon = styled(FaMagento)`
+export const SocialIcon = styled(RiSurgicalMaskLine)`
   margin-right: 10px;
+  height: 40px;
+  width: 32px;
 `;
 
 export const WebsiteRights = styled.small`
@@ -157,10 +159,12 @@ export const SocialIcons = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 240px;
+  width: 50px;
 `;
 
 export const SocialIconLink = styled.a`
   color: #fff;
   font-size: 24px;
+  height: 40px;
+  width: 32px;
 `;

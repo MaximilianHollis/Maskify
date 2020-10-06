@@ -1,11 +1,8 @@
 import React from 'react';
 import { Button } from '../../globalStyles';
 import {
-  FaFacebook,
   FaInstagram,
   FaYoutube,
-  FaTwitter,
-  FaLinkedin
 } from 'react-icons/fa';
 import {
   FooterContainer,
@@ -27,9 +24,6 @@ import {
   SocialIcons,
   SocialIconLink
 } from './Footer.elements';
-import {
-  Card 
-} from '../Universal/Universal.elements';
 
 function Footer() {
   return (
@@ -49,9 +43,6 @@ function Footer() {
           <FooterLinkItems>
             <FooterLinkTitle>About Us</FooterLinkTitle>
             <FooterLink to='/sign-up'>How it works</FooterLink>
-            <FooterLink to='/'>Testimonials</FooterLink>
-            <FooterLink to='/'>Careers</FooterLink>
-            <FooterLink to='/'>Investors</FooterLink>
             <FooterLink to='/'>Terms of Service</FooterLink>
           </FooterLinkItems>
           <FooterLinkItems>

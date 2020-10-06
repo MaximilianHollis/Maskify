@@ -6,6 +6,7 @@ import Home from './Pages/Home';
 import Todos from './Pages/Todos';
 import Register from './Pages/Register';
 import Admin  from './Pages/Admin';
+import Footer from './Elements/Footer/Footer'
 import PrivateRoute from './hocs/PrivateRoute';
 import UnPrivateRoute from './hocs/UnPrivateRoute';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -25,6 +26,7 @@ function App() {
           <PrivateRoute path="/todos" roles={["user","admin"]} component={Todos}/>
           <PrivateRoute path="/admin" roles={["admin"]} component={Admin}/>
         </Switch>
+        <Footer />
       </Theme>
     </Router>
   );
