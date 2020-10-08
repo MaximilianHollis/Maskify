@@ -16,28 +16,28 @@ passport.use(new JwtStrategy({
     jwtFromRequest : cookieExtractor,
     //MUST BE CHANGED BEFORE DEVELOPMENT
     secretOrKey : "Maskify"
-},(payload,done)=>{
-    User.findById({_id : payload.sub},(err,user)=>{
+},(payload, done)=>{
+    User.findById({_id : payload.sub}, (err, user)=>{
         if(err)
-            return done(err,false);
+            return done(err, false);
         if(user)
-            return done(null,user);
+            return done(null, user);
         else
-            return done(null,false);
+            return done(null, false);
     });
 }));
 
 // authenticated local strategy using username and password
-passport.use(new LocalStrategy((username,password,done)=>{
-    User.findOne({username},(err,user)=>{
+passport.use(new LocalStrategy((username,password, done)=>{
+    User.findOne({username}, (err, user)=>{
         // something went wrong with database
         if(err)
             return done(err);
         // if no user exist
         if(!user)
-            return done(null,false);
+            return done(null, false);
         // check if password is correct
-        user.comparePassword(password,done);
+        user.comparePassword(password, done);
         
     });
 }));
