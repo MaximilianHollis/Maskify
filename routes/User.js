@@ -12,9 +12,9 @@ userRouter.use(cors({origin: 'http://localhost:3000'}));
 
 const signToken = userID =>{
     return JWT.sign({
-        iss : "NoobCoder",
+        iss : "Maskify",
         sub : userID
-    },"NoobCoder",{expiresIn : "1h"});
+    },"Maskify",{expiresIn : "1h"});
 }
 
 userRouter.post('/register',(req,res)=>{
@@ -88,7 +88,7 @@ userRouter.get('/admin',passport.authenticate('jwt',{session : false}),(req,res)
         res.status(200).json({message : {msgBody : 'You are an admin', msgError : false}});
     }
     else
-        res.status(403).json({message : {msgBody : "You're not an admin,go away", msgError : true}});
+        res.status(403).json({message : {msgBody : "Login as admin to access", msgError : true}});
 });
 
 userRouter.get('/authenticated',passport.authenticate('jwt',{session : false}),(req,res)=>{
