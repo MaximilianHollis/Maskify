@@ -70,7 +70,6 @@ export const LoginCard = styled.div`
   @media screen and (max-width: 700px) {
   width: 95%;
   height: 500px;
-  transform: translate(0px, -100px);
 }
 ` 
 export const LoginCardHeader = styled.div`
