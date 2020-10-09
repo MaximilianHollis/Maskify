@@ -4,4 +4,4 @@ Paper is here:
 {more info....}
 
 TIMELINE:
-MUST BE FINISHED BY OCT 19
+MUST BE FINISHED BY OCT 19.
