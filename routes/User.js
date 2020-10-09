@@ -40,18 +40,18 @@ userRouter.post('/register',(req, res)=>{
 
 userRouter.post('/login',passport.authenticate('local', {session : false}),(req, res)=>{
     if(req.isAuthenticated()){
-       const {_id,username,role} = req.user;
+       const {_id, username,role} = req.user;
        const token = signToken(_id);
        //for prod, make the cookies secure, and change the domain OR ELSE!!!!!
        //res.cookie('access_token',token,{secure: false, sameSite: 'strict', path:'/'}); 
        //convert to nextjs api routes :)
        res.setHeader('set-cookie', `access_token=${token}`)
-       res.status(200).json({isAuthenticated : true,user : {username,role}});
+       res.status(200).json({isAuthenticated : true, user : {username, role}});
     }
 });
 
 userRouter.get('/logout',passport.authenticate('jwt',{session : false}),(req,res)=>{
-    res.clearCookie('access_token');
+    res.setHeader('set-cookie', `access_token=null`)
     res.json({user:{username : "", role : ""},success : true});
 });
 
