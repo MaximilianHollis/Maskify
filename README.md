@@ -10,5 +10,5 @@ TODO:
 Implement UI: 90%
 Implement API: 80%
 Implement Database: 80%
-Implement AI: 30%
+Implement AI: 50%
 Implement Image Scraper: 0%
