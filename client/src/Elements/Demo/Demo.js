@@ -1,25 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as blazeface from '@tensorflow-models/blazeface';
 import Img from '../../DemoImages/Samples/1.jpg'
+import { useCanvas } from '../Universal/Canvas';
 
 const tf = require('@tensorflow/tfjs')
 
-
-var Clipper = require('image-clipper');
-
 export default function Demo(){
-    useEffect(() => {
-        c = document.getElementById("canvas");
-        ctx = c.getContext("2d");
-        img = document.getElementById("img");
-        ctx.canvas.width  = Img.width;
-        ctx.canvas.height = Img.height;
-        ctx.drawImage(img, 0, 0);    
-        main();    
-    })
-    var c;
-    var ctx;
-    var img;
+
+    const [ coordinates, setCoordinates, canvasRef, canvasWidth, canvasHeight, url, setUrl ] = useCanvas();
+
+    const setCanvas = () => {
+        setUrl('https://s-media-cache-ak0.pinimg.com/236x/d7/b3/cf/d7b3cfe04c2dc44400547ea6ef94ba35.jpg');
+    }
 
     async function main() {
         // Load the model.
@@ -40,29 +32,24 @@ export default function Demo(){
         
             // Render a rectangle over each detected face.
             console.log(start[0], start[1], size[0], size[1])
-            ctx.fillRect(start[0], start[1], size[0], size[1]);
-    
-            /*   // Same cropped image
-            Clipper(Img, function() {
-                this.crop(start[0], start[1], size[0], size[1])
-                .toDataURL(function(dataUrl) {
-                    console.log('cropped!');
-                    crop.src = dataUrl;
-                });
-            });
-*/
+            //ctx.fillRect(start[0], start[1], size[0], size[1]);
+
             }
         } else {
             console.log('no people identified')
             }
         }
+        main();
     return (
     <>
         <h1>demo page</h1>
-        <img id='img' src={Img}/>
-        <canvas id="canvas"></canvas>
-        <img id="crop" className="test-images"></img>
-
+        <button onClick={() => setCanvas()}>click</button>
+        <img id='image' src={Img}></img>
+        <canvas 
+        className="App-canvas"
+        ref={canvasRef}
+        width={canvasWidth}
+        height={canvasHeight} />
     </>
     )
 }
