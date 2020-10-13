@@ -3,6 +3,7 @@ import GlobalStyle from './globalStyles';
 import Navbar from './Elements/Navbar/Navbar';
 import Login from './Pages/Login';
 import Home from './Pages/Home';
+import Demo from './Pages/Demo'
 import Todos from './Pages/Todos';
 import Register from './Pages/Register';
 import Admin  from './Pages/Admin';
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/" component={Home}/>
           <UnPrivateRoute path="/login" component={Login}/>
           <UnPrivateRoute path="/register" component={Register}/>
+          <UnPrivateRoute path="/demo" component={Demo}/>
           <PrivateRoute path="/todos" roles={["user","admin"]} component={Todos}/>
           <PrivateRoute path="/admin" roles={["admin"]} component={Admin}/>
         </Switch>

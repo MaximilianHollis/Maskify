@@ -2,7 +2,7 @@ import React from 'react';
 import { register } from '../Data/Register';
 import Register from '../Elements/Login/Register'
 
-function Home() {
+function Registration() {
   return (
     <>
      <Register {...register}/>
@@ -10,4 +10,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Registration;
