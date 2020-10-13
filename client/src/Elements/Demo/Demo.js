@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as blazeface from '@tensorflow-models/blazeface';
 import Img from '../../DemoImages/Samples/1.jpg'
 import { useCanvas } from '../Universal/Canvas';
@@ -6,11 +6,15 @@ import { useCanvas } from '../Universal/Canvas';
 const tf = require('@tensorflow/tfjs')
 
 export default function Demo(){
-
-    const [ coordinates, setCoordinates, canvasRef, canvasWidth, canvasHeight, url, setUrl ] = useCanvas();
+    const [ coordinates, setCoordinates, canvasRef, url, setUrl ] = useCanvas();
+    const image = useRef(null);
+    
+    const handleSize = (image) => {
+        console.log(image.offsetwidth)
+    }
 
     const setCanvas = () => {
-        setUrl('https://s-media-cache-ak0.pinimg.com/236x/d7/b3/cf/d7b3cfe04c2dc44400547ea6ef94ba35.jpg');
+        setUrl(Img);
     }
 
     async function main() {
@@ -44,12 +48,11 @@ export default function Demo(){
     <>
         <h1>demo page</h1>
         <button onClick={() => setCanvas()}>click</button>
-        <img id='image' src={Img}></img>
+        <img ref={image => handleSize(image)} id='image' src={Img}></img>
         <canvas 
         className="App-canvas"
         ref={canvasRef}
-        width={canvasWidth}
-        height={canvasHeight} />
+        />
     </>
     )
 }
