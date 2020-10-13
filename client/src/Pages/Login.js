@@ -2,7 +2,7 @@ import React from 'react';
 import { login } from '../Data/Login';
 import Login from '../Elements/Login/Login'
 
-function Home() {
+function LoginPage() {
   return (
     <>
      <Login {...login}/>
@@ -10,4 +10,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default LoginPage;
