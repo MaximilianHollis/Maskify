@@ -5,7 +5,7 @@ import Login from '../Elements/Login/Login'
 function LoginPage() {
   return (
     <>
-     <Login {...login}/>
+      <Login {...login} />
     </>
   );
 }
