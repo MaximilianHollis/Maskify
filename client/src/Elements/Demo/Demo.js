@@ -47,6 +47,21 @@ export default function Demo() {
                 ctx.fillText('Mask Detected', start[0], start[1] - 20);
                 ctx.rect(start[0], start[1], size[0], size[0]);
                 ctx.stroke();
+
+                let src = []
+
+                Clipper(img, function() {
+                    this.crop(start[0], start[1], size[0], size[0])
+                    .resize(50, 50)
+                    .toDataURL(50, function(dataUrl) {
+                        src.push(dataUrl)
+                        console.log(src)
+                    });
+
+                });
+
+
+
             }
         } else {
             console.log('no people identified')
@@ -57,7 +72,6 @@ export default function Demo() {
             <h1>demo page</h1>
             <img ref={image} onLoad={() => handleCanvas(image)} src={Img}></img>
             <canvas
-                onLoad={() => handleCanvas(image)}
                 className="canvas"
                 ref={canvas}
             />
