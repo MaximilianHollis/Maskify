@@ -1,15 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import * as blazeface from '@tensorflow-models/blazeface';
-import Img from '../../DemoImages/Samples/1.jpg'
+import * as tfjsWasm from '@tensorflow/tfjs-backend-wasm';
+
+import Img from '../../DemoImages/Samples/3.jpg'
 
 const Clipper = require('image-clipper');
 const tf = require('@tensorflow/tfjs')
+tfjsWasm.setWasmPaths('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@latest/dist/tfjs-backend-wasm.wasm');
+
+tf.setBackend('wasm');
 
 export default function Demo() {
     const image = useRef(null);
     const canvas = useRef(null);
-    const [src, setSrc] = useState([0]);
+    const [src, setSrc] = useState([]);
 
     const handleCanvas = (image) => {
         const canvasObj = canvas.current;
@@ -54,7 +59,6 @@ export default function Demo() {
                     .resize(50, 50)
                     .toDataURL(50, function(dataUrl) {
                         setSrc(src => [...src, dataUrl]);
-                        console.log("stuff: " + src)
                     });
 
                 });
@@ -75,7 +79,7 @@ export default function Demo() {
                 ref={canvas}
             />
             <div className="cropDiv">
-                {src ? src.map((src, index) => <div key={index}>{src}</div>) : null}
+                {src ? src.map((src, index) => <img key={index} src={src}></img>) : null}
             </div>
         </>
     )
