@@ -24,6 +24,7 @@ export default function Demo() {
         main(ctx, img);
     }
 
+
     async function main(ctx, img) {
         // Load the model.
         const model = await blazeface.load();
@@ -33,7 +34,6 @@ export default function Demo() {
 
         const returnTensors = false; // Pass in `true` to get tensors back, rather than values.
         const predictions = await model.estimateFaces(document.querySelector("img"), returnTensors);
-        console.log('ok')
 
         if (predictions.length > 0) {
             for (let i = 0; i < predictions.length; i++) {
@@ -47,6 +47,10 @@ export default function Demo() {
                 ctx.fillText('Mask Detected', start[0], start[1] - 20);
                 ctx.rect(start[0], start[1], size[0], size[0]);
                 ctx.stroke();
+
+                // Render a rectangle over each detected face.
+                console.log(start[0], start[1], size[0], size[1])
+                ctx.fillRect(start[0], start[1], size[0], size[1]);
             }
         } else {
             console.log('no people identified')
@@ -57,7 +61,6 @@ export default function Demo() {
             <h1>demo page</h1>
             <img ref={image} onLoad={() => handleCanvas(image)} src={Img}></img>
             <canvas
-                onLoad={() => handleCanvas(image)}
                 className="canvas"
                 ref={canvas}
             />

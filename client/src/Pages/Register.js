@@ -5,7 +5,7 @@ import Register from '../Elements/Login/Register'
 function Registration() {
   return (
     <>
-     <Register {...register}/>
+      <Register {...register} />
     </>
   );
 }

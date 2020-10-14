@@ -27,8 +27,8 @@ const InputContainer = styled.div`
     z-index: 500;
 
     ${props =>
-      props.focused &&
-      `
+    props.focused &&
+    `
       color: #4B59F7;
       font-size: 13px;
       transform: translateY(-23px) translateX(-5px);
@@ -127,9 +127,9 @@ Input.defaultProps = {
   onChange: text => {
     console.error(`Missing onChange prop: ${text}`);
   },
-  onFocus: () => {},
-  onBlur: () => {},
-  setRef: () => {}
+  onFocus: () => { },
+  onBlur: () => { },
+  setRef: () => { }
 };
 
 export default Input;
