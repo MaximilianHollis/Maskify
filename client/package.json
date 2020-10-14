@@ -5,8 +5,8 @@
   "dependencies": {
     "@tensorflow-models/blazeface": "0.0.5",
     "@tensorflow/tfjs": "^2.6.0",
-    "@tensorflow/tfjs-backend-wasm": "^2.6.0",
     "@tensorflow/tfjs-converter": "^2.6.0",
+    "@tensorflow/tfjs-core": "^2.6.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
