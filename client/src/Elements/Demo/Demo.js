@@ -1,23 +1,28 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as blazeface from '@tensorflow-models/blazeface';
 import Img from '../../DemoImages/Samples/1.jpg'
-import { useCanvas } from '../Universal/Canvas';
 
 const tf = require('@tensorflow/tfjs')
 
 export default function Demo() {
-    const [coordinates, setCoordinates, canvasRef, url, setUrl] = useCanvas();
     const image = useRef(null);
+    const canvas = useRef(null);
 
-    const handleSize = (image) => {
-        console.log(image.current.naturalHeight)
+
+    const handleCanvas = (image) => {
+        const canvasObj = canvas.current;
+        const ctx = canvasObj.getContext('2d');
+        ctx.canvas.width = image.current.naturalWidth;
+        ctx.canvas.height = image.current.naturalHeight;
+        var img = new Image();
+        img.src = Img;
+        img.onload = function () {
+            ctx.drawImage(img, 0, 0);
+        }
+        main(ctx);
     }
 
-    const setCanvas = () => {
-        setUrl(Img);
-    }
-
-    async function main() {
+    async function main(ctx) {
         // Load the model.
         const model = await blazeface.load();
 
@@ -33,25 +38,19 @@ export default function Demo() {
                 const start = predictions[i].topLeft;
                 const end = predictions[i].bottomRight;
                 const size = [end[0] - start[0], end[1] - start[1]];
-
-                // Render a rectangle over each detected face.
-                console.log(start[0], start[1], size[0], size[1])
-                //ctx.fillRect(start[0], start[1], size[0], size[1]);
-
+                ctx.fillRect(start[0], start[1], size[0], size[0]);
             }
         } else {
             console.log('no people identified')
         }
     }
-    main();
     return (
         <>
             <h1>demo page</h1>
-            <button onClick={() => setCanvas()}>click</button>
-            <img ref={image} onLoad={() => handleSize(image)} src={Img}></img>
+            <img ref={image} onLoad={() => handleCanvas(image)} src={Img}></img>
             <canvas
                 className="App-canvas"
-                ref={canvasRef}
+                ref={canvas}
             />
         </>
     )
