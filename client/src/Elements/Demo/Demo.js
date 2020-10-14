@@ -9,7 +9,7 @@ const tf = require('@tensorflow/tfjs')
 export default function Demo() {
     const image = useRef(null);
     const canvas = useRef(null);
-
+    const [src, setSrc] = useState([0]);
 
     const handleCanvas = (image) => {
         const canvasObj = canvas.current;
@@ -48,14 +48,13 @@ export default function Demo() {
                 ctx.rect(start[0], start[1], size[0], size[0]);
                 ctx.stroke();
 
-                let src = []
 
                 Clipper(img, function() {
                     this.crop(start[0], start[1], size[0], size[0])
                     .resize(50, 50)
                     .toDataURL(50, function(dataUrl) {
-                        src.push(dataUrl)
-                        console.log(src)
+                        setSrc(src => [...src, dataUrl]);
+                        console.log("stuff: " + src)
                     });
 
                 });
@@ -75,6 +74,9 @@ export default function Demo() {
                 className="canvas"
                 ref={canvas}
             />
+            <div className="cropDiv">
+                {src ? src.map((src, index) => <div key={index}>{src}</div>) : null}
+            </div>
         </>
     )
 }
