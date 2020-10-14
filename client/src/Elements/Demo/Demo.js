@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
 import * as blazeface from '@tensorflow-models/blazeface';
 import Img from '../../DemoImages/Samples/1.jpg'
 
+const Clipper = require('image-clipper');
 const tf = require('@tensorflow/tfjs')
 
 export default function Demo() {
@@ -19,10 +21,10 @@ export default function Demo() {
         img.onload = function () {
             ctx.drawImage(img, 0, 0);
         }
-        main(ctx);
+        main(ctx, img);
     }
 
-    async function main(ctx) {
+    async function main(ctx, img) {
         // Load the model.
         const model = await blazeface.load();
 
@@ -42,7 +44,7 @@ export default function Demo() {
                 ctx.lineWidth = "6";
                 ctx.strokeStyle = "red";
                 ctx.font = '25px serif';
-                ctx.fillText('Hello world', start[0], start[1] - 20);
+                ctx.fillText('Mask Detected', start[0], start[1] - 20);
                 ctx.rect(start[0], start[1], size[0], size[0]);
                 ctx.stroke();
             }
@@ -55,7 +57,8 @@ export default function Demo() {
             <h1>demo page</h1>
             <img ref={image} onLoad={() => handleCanvas(image)} src={Img}></img>
             <canvas
-                className="App-canvas"
+                onLoad={() => handleCanvas(image)}
+                className="canvas"
                 ref={canvas}
             />
         </>
