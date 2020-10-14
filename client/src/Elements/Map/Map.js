@@ -69,16 +69,16 @@ const MapChart = () => {
                         </text>
                       </Marker>
                     ) : (
-                      <Annotation
-                        subject={centroid}
-                        dx={offsets[cur.id][0]}
-                        dy={offsets[cur.id][1]}
-                      >
-                        <text x={4} fontSize={14} alignmentBaseline="middle">
-                          {cur.id}
-                        </text>
-                      </Annotation>
-                    ))}
+                        <Annotation
+                          subject={centroid}
+                          dx={offsets[cur.id][0]}
+                          dy={offsets[cur.id][1]}
+                        >
+                          <text x={4} fontSize={14} alignmentBaseline="middle">
+                            {cur.id}
+                          </text>
+                        </Annotation>
+                      ))}
                 </g>
               );
             })}

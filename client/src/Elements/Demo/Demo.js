@@ -25,6 +25,7 @@ export default function Demo() {
             main(ctx, img);
     }
 
+
     async function main(ctx, img) {
         // Load the model.
         const model = await blazeface.load();
@@ -34,7 +35,6 @@ export default function Demo() {
 
         const returnTensors = false; // Pass in `true` to get tensors back, rather than values.
         const predictions = await model.estimateFaces(document.querySelector("img"), returnTensors);
-        console.log('ok')
 
         if (predictions.length > 0) {
             for (let i = 0; i < predictions.length; i++) {

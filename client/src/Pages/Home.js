@@ -6,7 +6,7 @@ import Pricing from '../Elements/Pricing/Pricing'
 function Home() {
   return (
     <>
-      <InfoSection {...homeObjOne}/>
+      <InfoSection {...homeObjOne} />
       <Pricing />
       <InfoSection {...homeObjTwo} />
       <InfoSection {...homeObjThree} />
