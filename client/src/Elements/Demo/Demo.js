@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import * as blazeface from '@tensorflow-models/blazeface';
-import Img from '../../DemoImages/Samples/1.jpg'
+import * as tf from '@tensorflow/tfjs';
+
+import Img from '../../DemoImages/Samples/3.jpg'
 
 const Clipper = require('image-clipper');
-const tf = require('@tensorflow/tfjs')
 
 export default function Demo() {
     const image = useRef(null);
     const canvas = useRef(null);
-
+    const [src, setSrc] = useState([]);
 
     const handleCanvas = (image) => {
         const canvasObj = canvas.current;
@@ -21,7 +22,7 @@ export default function Demo() {
         img.onload = function () {
             ctx.drawImage(img, 0, 0);
         }
-        main(ctx, img);
+            main(ctx, img);
     }
 
 
@@ -48,9 +49,13 @@ export default function Demo() {
                 ctx.rect(start[0], start[1], size[0], size[0]);
                 ctx.stroke();
 
-                // Render a rectangle over each detected face.
-                console.log(start[0], start[1], size[0], size[1])
-                ctx.fillRect(start[0], start[1], size[0], size[1]);
+                Clipper(img, function () {
+                    this.crop(start[0], start[1], size[0], size[0])
+                        .resize(50, 50)
+                        .toDataURL(50, function (dataUrl) {
+                            setSrc(src => [...src, dataUrl]);
+                        });
+                });
             }
         } else {
             console.log('no people identified')
@@ -64,6 +69,9 @@ export default function Demo() {
                 className="canvas"
                 ref={canvas}
             />
+            <div className="cropDiv">
+                {src ? src.map((src, index) => <img key={index} src={src}></img>) : null}
+            </div>
         </>
     )
 }
