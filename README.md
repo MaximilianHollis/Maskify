@@ -23,11 +23,10 @@ TODO:
 Implement UI: 90%
 Implement API: 80%
 Implement Database: 80%
-Implement AI: 50%
+Implement AI: 80%
 Implement Image Scraper: 0%
 
-MONDAY OCT 12 TODO:
-1. Implement tensorflow blazeface with https://www.npmjs.com/package/image-clipper to sort images. 
-2. feed those images to ai
-3. develop and tune model
-4. merge into this project, and implement a protected api with rate limits
+Wednes day oct 14 todo:
+Grab 500 cropped faces and label them
+train ai with the faces and test for accuracy
+95% accuracy required
