@@ -1,27 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
 import * as blazeface from '@tensorflow-models/blazeface';
 import Img from '../../DemoImages/Samples/1.jpg'
 
+const Clipper = require('image-clipper');
 const tf = require('@tensorflow/tfjs')
 
-
-var Clipper = require('image-clipper');
-
 export default function Demo() {
-    useEffect(() => {
-        c = document.getElementById("canvas");
-        ctx = c.getContext("2d");
-        img = document.getElementById("img");
-        ctx.canvas.width = Img.width;
-        ctx.canvas.height = Img.height;
-        ctx.drawImage(img, 0, 0);
-        main();
-    })
-    var c;
-    var ctx;
-    var img;
+    const image = useRef(null);
+    const canvas = useRef(null);
 
-    async function main() {
+
+    const handleCanvas = (image) => {
+        const canvasObj = canvas.current;
+        const ctx = canvasObj.getContext('2d');
+        ctx.canvas.width = image.current.naturalWidth;
+        ctx.canvas.height = image.current.naturalHeight;
+        var img = new Image();
+        img.src = Img;
+        img.onload = function () {
+            ctx.drawImage(img, 0, 0);
+        }
+        main(ctx, img);
+    }
+
+
+    async function main(ctx, img) {
         // Load the model.
         const model = await blazeface.load();
 
@@ -36,20 +40,17 @@ export default function Demo() {
                 const start = predictions[i].topLeft;
                 const end = predictions[i].bottomRight;
                 const size = [end[0] - start[0], end[1] - start[1]];
+                ctx.beginPath();
+                ctx.lineWidth = "6";
+                ctx.strokeStyle = "red";
+                ctx.font = '25px serif';
+                ctx.fillText('Mask Detected', start[0], start[1] - 20);
+                ctx.rect(start[0], start[1], size[0], size[0]);
+                ctx.stroke();
 
                 // Render a rectangle over each detected face.
                 console.log(start[0], start[1], size[0], size[1])
                 ctx.fillRect(start[0], start[1], size[0], size[1]);
-
-                /*   // Same cropped image
-                Clipper(Img, function() {
-                    this.crop(start[0], start[1], size[0], size[1])
-                    .toDataURL(function(dataUrl) {
-                        console.log('cropped!');
-                        crop.src = dataUrl;
-                    });
-                });
-    */
             }
         } else {
             console.log('no people identified')
@@ -58,10 +59,11 @@ export default function Demo() {
     return (
         <>
             <h1>demo page</h1>
-            <img id='img' src={Img} />
-            <canvas id="canvas"></canvas>
-            <img id="crop" className="test-images"></img>
-
+            <img ref={image} onLoad={() => handleCanvas(image)} src={Img}></img>
+            <canvas
+                className="canvas"
+                ref={canvas}
+            />
         </>
     )
 }
