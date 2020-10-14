@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import * as blazeface from '@tensorflow-models/blazeface';
 import * as tf from '@tensorflow/tfjs';
 
-import Img from '../../DemoImages/Samples/3.jpg'
+import Img from '../../DemoImages/Samples/5.jpg'
 
 const Clipper = require('image-clipper');
 
@@ -28,14 +28,22 @@ export default function Demo() {
 
     async function main(ctx, img) {
         // Load the model.
-        const model = await blazeface.load();
+        const config = {
+            maxFaces: 8,
+            inputWidth: 128,
+            inputHeight: 128,
+            iouThreshold: 0.3,
+            scoreThreshold: 0.1
+        }
+
+        const model = await blazeface.load(config);
 
         // Pass in an image or video to the model. The model returns an array of
         // bounding boxes, probabilities, and landmarks, one for each detected face.
 
         const returnTensors = false; // Pass in `true` to get tensors back, rather than values.
         const predictions = await model.estimateFaces(document.querySelector("img"), returnTensors);
-
+        console.log(predictions)
         if (predictions.length > 0) {
             for (let i = 0; i < predictions.length; i++) {
                 const start = predictions[i].topLeft;
