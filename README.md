@@ -24,7 +24,6 @@ Implement UI: 90%
 Implement API: 80%
 Implement Database: 80%
 Implement AI: 80%
-Implement Image Scraper: 0%
 
 Wednes day oct 14 todo:
 Grab 500 cropped faces and label them
