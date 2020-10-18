@@ -1,6 +1,14 @@
 import styled from 'styled-components';
-import { CardInfo, Card } from '../../globalStyles'
+import { CardInfo, Card, Button } from '../../globalStyles'
 
+export const PricingButton = styled(Button)`
+  background: ${({ primary }) => (primary ? '#4B59F7' : '#a9b3c1')};
+  &:hover {
+    transition: all 0.3s ease-out;
+    background: #fff;
+    background-color: ${({ primary }) => (primary ? '#0467FB' : '#a9b3c1')};
+  }
+`
 export const PricingSection = styled.div`
   padding: 100px 0 160px;
   display: flex;

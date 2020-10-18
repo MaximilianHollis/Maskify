@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import * as blazeface from '@tensorflow-models/blazeface';
 import * as tf from '@tensorflow/tfjs';
 
-import Img from '../../DemoImages/Samples/5.jpg'
+import Img from '../../DemoImages/Samples/33.jpg'
 
 const Clipper = require('image-clipper');
 
@@ -29,10 +29,10 @@ export default function Demo() {
     async function main(ctx, img) {
         // Load the model.
         const config = {
-            maxFaces: 8,
+            maxFaces: 16,
             inputWidth: 128,
             inputHeight: 128,
-            iouThreshold: 0.3,
+            iouThreshold: 0.5,
             scoreThreshold: 0.1
         }
 

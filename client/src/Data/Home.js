@@ -13,7 +13,7 @@ export const homeObjOne = {
   img: require('../images/maskify-landing.svg'),
   alt: 'Credit Card',
   start: '',
-  backgroundImg: require('../images/landing.svg'),
+  backgroundImg: require('../images/mntn.svg'),
 };
 
 export const homeObjTwo = {

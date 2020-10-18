@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button } from '../../globalStyles';
 import { GiCrystalBars } from 'react-icons/gi';
 import { GiCutDiamond, GiRock } from 'react-icons/gi';
 import { IconContext } from 'react-icons/lib';
 import { Bold } from '../../globalStyles'
 import {
+  PricingButton,
   PricingSection,
   PricingWrapper,
   PricingHeading,
@@ -26,7 +26,7 @@ export default function Pricing() {
         <PricingWrapper>
           <PricingHeading>Our Plans</PricingHeading>
           <PricingContainer>
-            <PricingCard to='/register'>
+            <PricingCard to='/'>
               <PricingCardInfo>
                 <PricingCardIcon>
                   <GiRock />
@@ -35,11 +35,11 @@ export default function Pricing() {
                 <PricingCardCost>$10.00</PricingCardCost>
                 <PricingCardLength>per month, first month free</PricingCardLength>
                 <PricingCardFeatures>
-                  <PricingCardFeature>Local data</PricingCardFeature>
-                  <PricingCardFeature>Updated weekly</PricingCardFeature>
+                  <PricingCardFeature>One Live cam</PricingCardFeature>
+                  <PricingCardFeature>Daily status report</PricingCardFeature>
                   <PricingCardFeature>Basic analytics</PricingCardFeature>
                 </PricingCardFeatures>
-                <Button primary>Choose Plan</Button>
+                <PricingButton>Unavailable</PricingButton>
               </PricingCardInfo>
             </PricingCard>
             <PricingCard to='/register'>
@@ -51,14 +51,15 @@ export default function Pricing() {
                 <PricingCardCost>$50.00</PricingCardCost>
                 <PricingCardLength>per month</PricingCardLength>
                 <PricingCardFeatures>
-                  <PricingCardFeature><Bold>National</Bold> data</PricingCardFeature>
-                  <PricingCardFeature>Updated daily</PricingCardFeature>
+                  <PricingCardFeature><Bold>Live</Bold> data</PricingCardFeature>
+                  <PricingCardFeature>Hourly status reports</PricingCardFeature>
+                  <PricingCardFeature>Push notifications</PricingCardFeature>
                   <PricingCardFeature>Next Gen Analytics</PricingCardFeature>
                 </PricingCardFeatures>
-                <Button primary>Choose Plan</Button>
+                <PricingButton primary>Choose Plan</PricingButton>
               </PricingCardInfo>
             </PricingCard>
-            <PricingCard to='/register'>
+            <PricingCard to='/'>
               <PricingCardInfo>
                 <PricingCardIcon>
                   <GiCutDiamond />
@@ -67,11 +68,12 @@ export default function Pricing() {
                 <PricingCardCost>$100.00</PricingCardCost>
                 <PricingCardLength>per month</PricingCardLength>
                 <PricingCardFeatures>
-                  <PricingCardFeature><Bold>National</Bold> data</PricingCardFeature>
+                  <PricingCardFeature><Bold>Live</Bold> data</PricingCardFeature>
+                  <PricingCardFeature>Unlimeted live cams</PricingCardFeature>
                   <PricingCardFeature><Bold>Realtime</Bold> analytics and data</PricingCardFeature>
                   <PricingCardFeature>24/7 Support</PricingCardFeature>
                 </PricingCardFeatures>
-                <Button primary>Choose Plan</Button>
+                <PricingButton>Unavailable</PricingButton>
               </PricingCardInfo>
             </PricingCard>
           </PricingContainer>
