@@ -23,9 +23,4 @@ TODO:
 Implement UI: 90%
 Implement API: 80%
 Implement Database: 80%
-Implement AI: 80%
-
-Wednes day oct 14 todo:
-Grab 500 cropped faces and label them
-train ai with the faces and test for accuracy
-95% accuracy required
+Implement AI: 90%
