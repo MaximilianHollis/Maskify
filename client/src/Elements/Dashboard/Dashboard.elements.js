@@ -19,7 +19,7 @@ color: #fff;
 }
 
 @media screen and (max-width: 960px) {
-  width: 90%;
+  width: 100%;
   padding: 0;
 
   &:hover {
