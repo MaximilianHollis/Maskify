@@ -44,7 +44,7 @@ export const homeObjThree = {
   headline:
     'Dashboard provides for all your data needs!',
   description:
-    "Our Neural Engine processes over half a million photos daily. See what it can do for you.",
+    "Our Neural Engine processes your camera feeds live. See what it can do for you.",
   buttonLabel: 'View Case Study',
   imgStart: 'start',
   img: require('../images/mashup.png'),
@@ -62,7 +62,7 @@ export const homeObjFour = {
   topLine: 'Secure Database',
   headline: 'All your data is stored on our secure server',
   description:
-    'All our data is processed and stored on a reliable ubuntu server, secured by ssh authentication. Your records and data our safe with us.',
+    'All our data is processed and stored on a reliable ubuntu server, secured by ssh authentication. Your records and data our safe with us. All live feeds processed locally on your own hardware.',
   buttonLabel: 'Sign Up Now',
   imgStart: 'start',
   img: require('../images/svg-3.svg'),

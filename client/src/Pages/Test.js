@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
-import TodoItem from '../Elements/TodoItem';
-import TodoService from '../Services/TodoService';
+import DataService from '../Services/DataService';
 import Message from '../Elements/Message';
 import { AuthContext } from '../Context/AuthContext';
 
-const Todos = () => {
-    const [todo, setTodo] = useState({ name: "" });
-    const [todos, setTodos] = useState([]);
+const Test = () => {
+    const [data, setData] = useState({ mask: "" });
+    const [data, setData] = useState({ noMask: "" });
+    const [datas, setDatas] = useState([]);
     const [message, setMessage] = useState(null);
     const authContext = useContext(AuthContext);
 
@@ -75,4 +75,4 @@ const Todos = () => {
 
 }
 
-export default Todos;
+export default Test;

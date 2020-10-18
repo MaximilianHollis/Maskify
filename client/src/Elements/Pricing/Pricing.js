@@ -48,8 +48,8 @@ export default function Pricing() {
                   <GiCrystalBars />
                 </PricingCardIcon>
                 <PricingCardPlan>Premium</PricingCardPlan>
-                <PricingCardCost>$50.00</PricingCardCost>
-                <PricingCardLength>per month</PricingCardLength>
+                <PricingCardCost>FREE</PricingCardCost>
+                <PricingCardLength>for open beta</PricingCardLength>
                 <PricingCardFeatures>
                   <PricingCardFeature><Bold>Live</Bold> data</PricingCardFeature>
                   <PricingCardFeature>Hourly status reports</PricingCardFeature>
@@ -69,7 +69,7 @@ export default function Pricing() {
                 <PricingCardLength>per month</PricingCardLength>
                 <PricingCardFeatures>
                   <PricingCardFeature><Bold>Live</Bold> data</PricingCardFeature>
-                  <PricingCardFeature>Unlimeted live cams</PricingCardFeature>
+                  <PricingCardFeature>Unlimited live cams</PricingCardFeature>
                   <PricingCardFeature><Bold>Realtime</Bold> analytics and data</PricingCardFeature>
                   <PricingCardFeature>24/7 Support</PricingCardFeature>
                 </PricingCardFeatures>

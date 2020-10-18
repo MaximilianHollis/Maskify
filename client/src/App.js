@@ -9,6 +9,9 @@ import Register from './Pages/Register';
 import Admin from './Pages/Admin';
 import Dashboard from './Pages/Dashboard';
 import Footer from './Elements/Footer/Footer'
+
+import Test from './Pages/Test'
+
 import PrivateRoute from './hocs/PrivateRoute';
 import UnPrivateRoute from './hocs/UnPrivateRoute';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';

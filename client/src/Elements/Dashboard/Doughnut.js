@@ -6,7 +6,7 @@ function getRandomInt(min, max) {
 }
 
 export default function DoughnutChart() {
-  const data = {
+  let data = {
     labels: [
       'Mask',
       'No mask',
