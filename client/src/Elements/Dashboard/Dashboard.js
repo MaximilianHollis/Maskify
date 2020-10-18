@@ -7,6 +7,7 @@ import {
     Wrapper
 } from './Dashboard.elements';
 import { Button, Img, ImgWrapper } from '../../globalStyles';
+import DoughnutChart from './Doughnut'
 
 export default function Dash() {
     return (
@@ -15,7 +16,9 @@ export default function Dash() {
                 <DashRow>
                     <DashColumn>
                         <Card>
-                            hello there
+                            <CardInfo>
+                                <DoughnutChart />
+                            </CardInfo>
                         </Card>
                     </DashColumn>
                     <DashColumn>
