@@ -8,6 +8,7 @@ import {
 } from './Dashboard.elements';
 import { Button, Img, ImgWrapper } from '../../globalStyles';
 import DoughnutChart from './Doughnut'
+import LineChart from './Line'
 
 export default function Dash() {
     return (
@@ -16,15 +17,18 @@ export default function Dash() {
                 <DashRow>
                     <DashColumn>
                         <Card>
-                            <CardInfo>
-                                <DoughnutChart />
-                            </CardInfo>
+                            <DoughnutChart />
                         </Card>
                     </DashColumn>
                     <DashColumn>
                         <Card>
-                            hello there again
+                            <LineChart />
                         </Card>
+                    </DashColumn>
+                    <DashColumn full>
+                    <Card>
+                        hello
+                    </Card>
                     </DashColumn>
                 </DashRow>
             </Wrapper>

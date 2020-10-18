@@ -8,21 +8,23 @@ function getRandomInt(min, max) {
 export default function DoughnutChart() {
   const data = {
     labels: [
-      'Red',
-      'Green',
-      'Yellow'
+      'Mask',
+      'No mask',
     ],
+    borderColor: '#242424',
     datasets: [{
-      data: [getRandomInt(50, 200), getRandomInt(100, 150), getRandomInt(150, 250)],
+      data: [ getRandomInt(150, 100), getRandomInt(15, 25)],
       backgroundColor: [
-        '#FF6384',
         '#36A2EB',
-        '#FFCE56'
+        '#FF6384',
       ],
       hoverBackgroundColor: [
-        '#FF6384',
         '#36A2EB',
-        '#FFCE56'
+        '#FF6384',
+      ],
+      borderColor: [
+        '#242424',
+        '#242424',
       ]
     }]
   };
@@ -35,7 +37,6 @@ export default function DoughnutChart() {
   }) */
   return (
     <div>
-      <h2>I AM DONUT :)</h2>
       <Doughnut data={data} />
     </div>
   );

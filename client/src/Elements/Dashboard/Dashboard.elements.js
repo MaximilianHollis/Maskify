@@ -14,10 +14,6 @@ color: #fff;
   margin: 24px;
 }
 
-&:hover {
-  box-shadow: 0 12px 40px rgba(56, 125, 255, 0.5);
-}
-
 @media screen and (max-width: 960px) {
   width: 100%;
   padding: 0;
@@ -49,8 +45,9 @@ export const DashColumn = styled.div`
   padding-right: 15px;
   padding-left: 15px;
   flex: 1;
-  max-width: 50%;
   flex-basis: 50%;
+  max-width: ${({ full }) => (full ? '100%' : '50%')};
+
 
   @media screen and (max-width: 768px) {
     max-width: 100%;
