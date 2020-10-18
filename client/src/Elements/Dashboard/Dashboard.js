@@ -4,7 +4,9 @@ import {
     CardInfo,
     DashRow,
     DashColumn,
-    Wrapper
+    Wrapper,
+    CameraHeader,
+    CameraButton,
 } from './Dashboard.elements';
 import { Button, Img, ImgWrapper } from '../../globalStyles';
 import DoughnutChart from './Doughnut'
@@ -27,7 +29,11 @@ export default function Dash() {
                     </DashColumn>
                     <DashColumn full>
                     <Card>
-                        hello
+                        <CardInfo>
+                            <CameraHeader>Add a Camera</CameraHeader>
+                            Add a camera to get started!
+                            <CameraButton>Add Camera</CameraButton>
+                        </CardInfo>
                     </Card>
                     </DashColumn>
                 </DashRow>

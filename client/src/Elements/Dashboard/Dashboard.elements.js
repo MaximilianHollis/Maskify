@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Section } from '../../globalStyles'
+import { Section, Button } from '../../globalStyles'
 
 export const Card = styled.div`
 background: #242424;
@@ -17,6 +17,7 @@ color: #fff;
 @media screen and (max-width: 960px) {
   width: 100%;
   padding: 0;
+  height: 60%;
 
   &:hover {
     transform: none;
@@ -27,7 +28,6 @@ color: #fff;
 export const CardInfo = styled.div`
 display: flex;
 flex-direction: column;
-height: 500px;
 padding: 24px;
 align-items: center;
 color: #fff;
@@ -60,3 +60,15 @@ export const DashColumn = styled.div`
 export const Wrapper = styled.div`
     padding: 16px 16px 16px 16px;
 `;
+
+
+export const CameraHeader = styled.h1`
+  color: #fff;
+  font-size: 48px;
+  margin-bottom: 24px;
+`;
+
+export const CameraButton = styled(Button)`
+  padding: 12px;
+  margin: 12px;
+`
