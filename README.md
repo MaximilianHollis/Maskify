@@ -23,4 +23,4 @@ TODO:
 Implement UI: 90%
 Implement API: 80%
 Implement Database: 100%
-Implement AI: 90%
+Implement AI: 100%
