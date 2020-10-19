@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import * as blazeface from '@tensorflow-models/blazeface';
 import * as tf from '@tensorflow/tfjs';
 import * as mobilenet from '@tensorflow-models/mobilenet';
+import * as knnClassifier from '@tensorflow-models/knn-classifier';
 
 import Img from '../../DemoImages/Samples/33.jpg'
 
@@ -23,7 +24,7 @@ export default function Demo() {
         img.onload = function () {
             ctx.drawImage(img, 0, 0);
         }
-            main(ctx, img);
+        main(ctx, img);
     }
 
 
@@ -72,7 +73,66 @@ export default function Demo() {
     }
 
     async function getMask() {
+        const maskImageCount = 27;
+        const noMaskImageCount = 25;
+        const testImageCount = 5;
 
+        const trainImagesContainer = document.querySelector('.train-images');
+
+        // Add mask images to the DOM and give them a class of `mask-img`
+        for (let i = 10; i <= maskImageCount; i++) {
+            const newImage = document.createElement('IMG');
+            newImage.setAttribute('src', `images/mask/${i}.jpg`);
+            newImage.classList.add('mask-img');
+            trainImagesContainer.appendChild(newImage);
+        }
+        // Add no mask images to the DOM and give them a class of `no-mask-img`
+        for (let i = 10; i <= noMaskImageCount; i++) {
+            const newImage = document.createElement('IMG');
+            newImage.setAttribute('src', `images/no_mask/${i}.jpg`);
+            newImage.classList.add('no-mask-img');
+            trainImagesContainer.appendChild(newImage);
+        }
+
+        // Load mobilenet module
+        const mobilenetModule = await mobilenet.load({ version: 2, alpha: 1 });
+        // Add examples to the KNN Classifier
+        const classifier = await trainClassifier(mobilenetModule);
+
+        // Predict class for the test image
+        for (let i = 1; i <= testImageCount; i++) {
+            const testImage = document.getElementById('test-img');
+            testImage.setAttribute('src', `images/test/${i}.jpg`);
+            testImage.classList.add('test-img');
+            const tfTestImage = tf.browser.fromPixels(testImage);
+            const logits = mobilenetModule.infer(tfTestImage, 'conv_preds');
+            const prediction = await classifier.predictClass(logits);
+            console.log("num: " + i)
+            console.log(prediction.label)
+        }
+    }
+
+
+    async function trainClassifier(mobilenetModule) {
+        // Create a new KNN Classifier
+        const classifier = knnClassifier.create();
+
+        // Train using mask images
+        const maskImages = document.querySelectorAll('.mask-img');
+        maskImages.forEach(img => {
+            const tfImg = tf.browser.fromPixels(img);
+            const logits = mobilenetModule.infer(tfImg, 'conv_preds');
+            classifier.addExample(logits, 0); // has mask
+        });
+        // Train using no mask images
+        const noMaskImages = document.querySelectorAll('.no-mask-img');
+        noMaskImages.forEach(img => {
+            const tfImg = tf.browser.fromPixels(img);
+            const logits = mobilenetModule.infer(tfImg, 'conv_preds');
+            classifier.addExample(logits, 1); // no mask
+        });
+
+        return classifier;
     }
 
     return (
