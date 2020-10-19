@@ -30,6 +30,7 @@ function App() {
           <UnPrivateRoute path="/register" component={Register} />
           <UnPrivateRoute path="/demo" component={Demo} />
           <PrivateRoute path="/todos" roles={["user", "admin"]} component={Todos} />
+          <PrivateRoute path="/test" roles={["user", "admin"]} component={Test} />
           <PrivateRoute path="/dashboard" roles={["user", "admin"]} component={Dashboard} />
           <PrivateRoute path="/admin" roles={["admin"]} component={Admin} />
         </Switch>

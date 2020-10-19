@@ -1,5 +1,5 @@
 export default {
-    getDatas: () => {
+    getMasks: () => {
         return fetch('/user/datas')
             .then(response => {
                 if (response.status !== 401) {
@@ -9,7 +9,7 @@ export default {
                     return { message: { msgBody: "UnAuthorized", msgError: true } };
             });
     },
-    postData: data => {
+    postMask: data => {
         return fetch('/user/data', {
             method: "post",
             body: JSON.stringify(data),

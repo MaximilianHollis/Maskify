@@ -1,29 +1,30 @@
 import React, { useState, useContext, useEffect } from 'react';
 import DataService from '../Services/DataService';
-import Message from '../Elements/Message';
 import { AuthContext } from '../Context/AuthContext';
+import Message from '../Elements/Message';
 
-const Test = () => {
-    const [data, setData] = useState({ mask: "" });
-    const [data, setData] = useState({ noMask: "" });
-    const [datas, setDatas] = useState([]);
-    const [message, setMessage] = useState(null);
+const Todos = () => {
+    const [mask, setMask] = useState({ mask: "" });
+    const [masks, setMasks] = useState([]);
     const authContext = useContext(AuthContext);
+    const [message, setMessage] = useState(null);
 
     useEffect(() => {
-        TodoService.getTodos().then(data => {
-            setTodos(data.todos);
+        DataService.getMasks().then(data => {
+            resetForm();
+            setMasks(data.masks);
         });
     }, []);
 
     const onSubmit = e => {
         e.preventDefault();
-        TodoService.postTodo(todo).then(data => {
+        console.log(mask)
+        DataService.postMask(mask).then(data => {
             const { message } = data;
             resetForm();
             if (!message.msgError) {
-                TodoService.getTodos().then(getData => {
-                    setTodos(getData.todos);
+                DataService.getMasks().then(getData => {
+                    setMasks(getData.masks);
                     setMessage(message);
                 });
             }
@@ -39,22 +40,22 @@ const Test = () => {
     }
 
     const onChange = e => {
-        setTodo({ name: e.target.value });
+        setMask({ mask: e.target.value });
     }
 
     const resetForm = () => {
-        setTodo({ name: "" });
+        setMasks({ mask: "" });
     }
 
     return (
         <div>
             <ul className="list-group">
                 {
-                    todos ?
-                        todos.map(todo => {
-                            return <TodoItem key={todo._id} todo={todo} />
+                   /*  masks ?
+                        masks.map(mask => {
+                            return <p key={mask._id}>{mask}</p>
                         }) :
-                        (<p>nothing</p>)
+                        (<p>nothing</p>) */
                 }
             </ul>
             <br />
@@ -62,17 +63,16 @@ const Test = () => {
                 <label htmlFor="todo">Enter Todo</label>
                 <input type="text"
                     name="todo"
-                    value={todo.name}
+                    value={mask.name}
                     onChange={onChange}
                     className="form-control"
                     placeholder="Please Enter Todo" />
                 <button className="btn btn-lg btn-primary btn-block"
                     type="submit">Submit</button>
             </form>
-            {message ? <Message message={message} /> : null}
         </div>
     );
 
 }
 
-export default Test;
+export default Todos;
