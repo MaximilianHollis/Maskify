@@ -5,10 +5,9 @@ import * as tf from '@tensorflow/tfjs';
 import * as mobilenet from '@tensorflow-models/mobilenet';
 import * as knnClassifier from '@tensorflow-models/knn-classifier';
 
-import Img from '../../DemoImages/Samples/33.jpg'
+import Img from '../../DemoImages/Samples/1.jpg'
 
 const Clipper = require('image-clipper');
-const Tensorset = require('tensorset');
 
 export default function Demo() {
     const image = useRef(null);
@@ -93,16 +92,34 @@ export default function Demo() {
             console.log(classifier)
 
             // Predict class for the test image
-            for (let i = 1; i <= testImageCount; i++) {
-                const testImage = test.current;
-                testImage.setAttribute('src', dataUrl);
-                testImage.classList.add('test-img');
-                const tfTestImage = tf.browser.fromPixels(testImage);
-                const logits = mobilenetModule.infer(tfTestImage, 'conv_preds');
-                const prediction = await classifier.predictClass(logits);
-                console.log("num: " + i)
-                console.log(prediction.label)
+            const testImage = test.current;
+            testImage.setAttribute('src', dataUrl);
+            testImage.classList.add('test-img');
+            const tfTestImage = tf.browser.fromPixels(testImage);
+            const logits = mobilenetModule.infer(tfTestImage, 'conv_preds');
+            const prediction = await classifier.predictClass(logits);
+            async function trainClassifier(mobilenetModule) {
+                // Create a new KNN Classifier
+                const classifier = knnClassifier.create();
+
+                // Train using mask images
+                const maskImages = document.querySelectorAll('.mask-img');
+                maskImages.forEach(img => {
+                    const tfImg = tf.browser.fromPixels(img);
+                    const logits = mobilenetModule.infer(tfImg, 'conv_preds');
+                    classifier.addExample(logits, 0); // has mask
+                });
+                // Train using no mask images
+                const noMaskImages = document.querySelectorAll('.no-mask-img');
+                noMaskImages.forEach(img => {
+                    const tfImg = tf.browser.fromPixels(img);
+                    const logits = mobilenetModule.infer(tfImg, 'conv_preds');
+                    classifier.addExample(logits, 1); // no mask
+                });
+
+                return classifier;
             }
+            console.log(prediction.label)
         }
     }
 
