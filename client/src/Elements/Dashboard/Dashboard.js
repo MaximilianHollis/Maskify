@@ -32,7 +32,7 @@ export default function Dash() {
                         <CardInfo>
                             <CameraHeader>Add a Camera</CameraHeader>
                             Add a camera to get started!
-                            <CameraButton>Add Camera</CameraButton>
+                            <CameraButton to='ca'>Add Camera</CameraButton>
                         </CardInfo>
                     </Card>
                     </DashColumn>

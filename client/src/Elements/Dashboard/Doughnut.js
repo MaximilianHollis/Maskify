@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
+import DataService from '../../Services/DataService';
+import { AuthContext } from '../../Context/AuthContext';
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+
 
 export default function DoughnutChart() {
-  let data = {
+  const [masks, setMasks] = useState({ 'mask': 0, 'noMask': 0 });
+  const [chartData, setChartData] = useState({
     labels: [
       'Mask',
       'No mask',
     ],
     borderColor: '#242424',
     datasets: [{
-      data: [ getRandomInt(150, 100), getRandomInt(15, 25)],
+      data: [getMaskData(), getNoMaskData()],
       backgroundColor: [
         '#36A2EB',
         '#FF6384',
@@ -27,17 +28,55 @@ export default function DoughnutChart() {
         '#242424',
       ]
     }]
-  };
-/*   const { data, setData } = useState(dummyData);
- 
+  })
   useEffect(() => {
     setInterval(() => {
-      setData(data)
-    }, '5000')
-  }) */
+      DataService.getMasks().then(data => {
+        masks.mask = 0;
+        masks.noMask = 0;
+        data.datas.map((m) => {
+          m.mask == 'M' ? masks.mask++ : masks.noMask++;
+          setMasks(masks)
+          setChartData({
+            labels: [
+              'Mask',
+              'No mask',
+            ],
+            borderColor: '#242424',
+            datasets: [{
+              data: [getMaskData(), getNoMaskData()],
+              backgroundColor: [
+                '#36A2EB',
+                '#FF6384',
+              ],
+              hoverBackgroundColor: [
+                '#36A2EB',
+                '#FF6384',
+              ],
+              borderColor: [
+                '#242424',
+                '#242424',
+              ]
+            }]
+          })
+        })
+        console.log(masks)
+      });
+    }, 1000);
+
+  }, []);
+
+  function getMaskData() {
+    return masks.mask;
+  }
+
+  function getNoMaskData() {
+    return masks.noMask;
+  }
+
   return (
     <div>
-      <Doughnut data={data} />
+      <Doughnut data={chartData} />
     </div>
   );
 }

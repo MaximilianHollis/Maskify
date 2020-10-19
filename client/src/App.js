@@ -28,7 +28,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <UnPrivateRoute path="/login" component={Login} />
           <UnPrivateRoute path="/register" component={Register} />
-          <UnPrivateRoute path="/demo" component={Demo} />
+          <PrivateRoute path="/cams" roles={["user", "admin"]} component={Demo} />
           <PrivateRoute path="/todos" roles={["user", "admin"]} component={Todos} />
           <PrivateRoute path="/test" roles={["user", "admin"]} component={Test} />
           <PrivateRoute path="/dashboard" roles={["user", "admin"]} component={Dashboard} />

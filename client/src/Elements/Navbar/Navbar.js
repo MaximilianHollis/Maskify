@@ -69,11 +69,6 @@ const Navbar = props => {
                                   </NavLinks>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLinks to='/demo' onClick={closeMobileMenu}>
-                                        Demo
-                                  </NavLinks>
-                                </NavItem>
-                                <NavItem>
                                     <NavLinks to='/login' onClick={closeMobileMenu}>
                                         Login
                                   </NavLinks>
@@ -119,8 +114,8 @@ const Navbar = props => {
                                   </NavLinks>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLinks to='/todos' onClick={closeMobileMenu}>
-                                        Todos
+                                    <NavLinks to='/cams' onClick={closeMobileMenu}>
+                                        Cams
                                   </NavLinks>
                                 </NavItem>
                                 {

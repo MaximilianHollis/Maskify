@@ -4,6 +4,9 @@ import * as blazeface from '@tensorflow-models/blazeface';
 import * as tf from '@tensorflow/tfjs';
 import * as mobilenet from '@tensorflow-models/mobilenet';
 import * as knnClassifier from '@tensorflow-models/knn-classifier';
+import DataService from '../../Services/DataService';
+import { AuthContext } from '../../Context/AuthContext';
+
 
 import Img from '../../DemoImages/Samples/1.jpg'
 
@@ -38,7 +41,7 @@ export default function Demo() {
             inputWidth: 128,
             inputHeight: 128,
             iouThreshold: 0.5,
-            scoreThreshold: 0.1
+            scoreThreshold: 0.5
         }
 
         const model = await blazeface.load(config);
@@ -58,7 +61,6 @@ export default function Demo() {
                 ctx.lineWidth = "6";
                 ctx.strokeStyle = "red";
                 ctx.font = '25px serif';
-                ctx.fillText('Mask Detected', start[0], start[1] - 20);
                 ctx.rect(start[0], start[1], size[0], size[0]);
                 ctx.stroke();
 
@@ -67,7 +69,7 @@ export default function Demo() {
                         .resize(50, 50)
                         .toDataURL(50, function (dataUrl) {
                             setSrc(src => [...src, dataUrl]);
-                            getMask(dataUrl);
+                            getMask(dataUrl, ctx, start);
                         });
                 });
             }
@@ -76,12 +78,11 @@ export default function Demo() {
         }
     }
 
-    async function getMask(dataUrl) {
-        const testImageCount = 5;
+    async function getMask(dataUrl, ctx, start) {
 
         // Load mobilenet module
         const mobilenetModule = await mobilenet.load({ version: 2, alpha: 1 });
-        load();
+        load(ctx, start);
         let classifier = knnClassifier.create();
 
 
@@ -89,7 +90,6 @@ export default function Demo() {
             //Get dataset from file and conver to tensors
             let dataset = await require('./MaskNet/model.json');
             classifier.setClassifierDataset(Object.fromEntries((dataset).map(([label, data, shape]) => [label, tf.tensor(data, shape)])));
-            console.log(classifier)
 
             // Predict class for the test image
             const testImage = test.current;
@@ -98,26 +98,14 @@ export default function Demo() {
             const tfTestImage = tf.browser.fromPixels(testImage);
             const logits = mobilenetModule.infer(tfTestImage, 'conv_preds');
             const prediction = await classifier.predictClass(logits);
-            async function trainClassifier(mobilenetModule) {
-                // Create a new KNN Classifier
-                const classifier = knnClassifier.create();
-
-                // Train using mask images
-                const maskImages = document.querySelectorAll('.mask-img');
-                maskImages.forEach(img => {
-                    const tfImg = tf.browser.fromPixels(img);
-                    const logits = mobilenetModule.infer(tfImg, 'conv_preds');
-                    classifier.addExample(logits, 0); // has mask
-                });
-                // Train using no mask images
-                const noMaskImages = document.querySelectorAll('.no-mask-img');
-                noMaskImages.forEach(img => {
-                    const tfImg = tf.browser.fromPixels(img);
-                    const logits = mobilenetModule.infer(tfImg, 'conv_preds');
-                    classifier.addExample(logits, 1); // no mask
-                });
-
-                return classifier;
+            if(prediction.label == 1){
+                ctx.fillText('No Mask Detected', start[0], start[1] - 20);
+                console.log('no mask')
+                DataService.postMask({mask: 'N'});
+            }else {
+                ctx.fillText('Mask Detected', start[0], start[1] - 20);
+                console.log('mask')
+                DataService.postMask({mask: 'M'});
             }
             console.log(prediction.label)
         }

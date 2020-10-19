@@ -24,7 +24,6 @@ const Todos = () => {
             resetForm();
             if (!message.msgError) {
                 DataService.getMasks().then(getData => {
-                    //needs a proper callback
                     setMasks(getData.masks);
                     setMessage(message);
                 });
