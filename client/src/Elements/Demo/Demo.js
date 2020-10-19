@@ -11,8 +11,11 @@ const Clipper = require('image-clipper');
 
 export default function Demo() {
     const image = useRef(null);
+    const test = useRef(null);
     const canvas = useRef(null);
     const [src, setSrc] = useState([]);
+
+
 
     const handleCanvas = (image) => {
         const canvasObj = canvas.current;
@@ -64,6 +67,7 @@ export default function Demo() {
                         .resize(50, 50)
                         .toDataURL(50, function (dataUrl) {
                             setSrc(src => [...src, dataUrl]);
+                            getMask(dataUrl);
                         });
                 });
             }
@@ -72,37 +76,31 @@ export default function Demo() {
         }
     }
 
-    async function getMask() {
-        const maskImageCount = 27;
-        const noMaskImageCount = 25;
+    async function getMask(dataUrl) {
         const testImageCount = 5;
-
-        const trainImagesContainer = document.querySelector('.train-images');
-
-        // Add mask images to the DOM and give them a class of `mask-img`
-        for (let i = 10; i <= maskImageCount; i++) {
-            const newImage = document.createElement('IMG');
-            newImage.setAttribute('src', `images/mask/${i}.jpg`);
-            newImage.classList.add('mask-img');
-            trainImagesContainer.appendChild(newImage);
-        }
-        // Add no mask images to the DOM and give them a class of `no-mask-img`
-        for (let i = 10; i <= noMaskImageCount; i++) {
-            const newImage = document.createElement('IMG');
-            newImage.setAttribute('src', `images/no_mask/${i}.jpg`);
-            newImage.classList.add('no-mask-img');
-            trainImagesContainer.appendChild(newImage);
-        }
 
         // Load mobilenet module
         const mobilenetModule = await mobilenet.load({ version: 2, alpha: 1 });
         // Add examples to the KNN Classifier
-        const classifier = await trainClassifier(mobilenetModule);
+        const classifier = await load();
+        
+        async function load() {
+            //can be change to other source
+           let dataset = await require('./MaskNet/model.json');
+           let tensorObj = (dataset)
+           //covert back to tensor
+           Object.keys(tensorObj).forEach((key) => {
+             tensorObj[key] = tf.tensor(tensorObj[key], [tensorObj[key].length / 1000, 1000])
+           })
+           classifier.setClassifierDataset(tensorObj);
+         }
+
+        console.log(classifier)
 
         // Predict class for the test image
         for (let i = 1; i <= testImageCount; i++) {
-            const testImage = document.getElementById('test-img');
-            testImage.setAttribute('src', `images/test/${i}.jpg`);
+            const testImage = test.current;
+            testImage.setAttribute('src', dataUrl);
             testImage.classList.add('test-img');
             const tfTestImage = tf.browser.fromPixels(testImage);
             const logits = mobilenetModule.infer(tfTestImage, 'conv_preds');
@@ -144,7 +142,8 @@ export default function Demo() {
                 ref={canvas}
             />
             <div className="cropDiv">
-                {src ? src.map((src, index) => <img class="test-img" key={index} src={src}></img>) : null}
+                {src ? src.map((src, index) => <img key={index} src={src}></img>) : null}
+                <img className="test-image" ref={test}></img>
             </div>
         </>
     )
