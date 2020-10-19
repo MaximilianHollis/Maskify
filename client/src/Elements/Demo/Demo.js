@@ -82,13 +82,12 @@ export default function Demo() {
 
         // Load mobilenet module
         const mobilenetModule = await mobilenet.load({ version: 2, alpha: 1 });
-        // Add examples to the KNN Classifier
         load();
         let classifier = knnClassifier.create();
 
 
         async function load() {
-            //can be change to other source
+            //Get dataset from file and conver to tensors
             let dataset = await require('./MaskNet/model.json');
             classifier.setClassifierDataset(Object.fromEntries((dataset).map(([label, data, shape]) => [label, tf.tensor(data, shape)])));
             console.log(classifier)
@@ -105,31 +104,6 @@ export default function Demo() {
                 console.log(prediction.label)
             }
         }
-    }
-
-
-
-
-    async function trainClassifier(mobilenetModule) {
-        // Create a new KNN Classifier
-        const classifier = knnClassifier.create();
-
-        // Train using mask images
-        const maskImages = document.querySelectorAll('.mask-img');
-        maskImages.forEach(img => {
-            const tfImg = tf.browser.fromPixels(img);
-            const logits = mobilenetModule.infer(tfImg, 'conv_preds');
-            classifier.addExample(logits, 0); // has mask
-        });
-        // Train using no mask images
-        const noMaskImages = document.querySelectorAll('.no-mask-img');
-        noMaskImages.forEach(img => {
-            const tfImg = tf.browser.fromPixels(img);
-            const logits = mobilenetModule.infer(tfImg, 'conv_preds');
-            classifier.addExample(logits, 1); // no mask
-        });
-
-        return classifier;
     }
 
     return (
