@@ -8,6 +8,7 @@ import * as knnClassifier from '@tensorflow-models/knn-classifier';
 import Img from '../../DemoImages/Samples/33.jpg'
 
 const Clipper = require('image-clipper');
+const Tensorset = require('tensorset');
 
 export default function Demo() {
     const image = useRef(null);
@@ -82,33 +83,31 @@ export default function Demo() {
         // Load mobilenet module
         const mobilenetModule = await mobilenet.load({ version: 2, alpha: 1 });
         // Add examples to the KNN Classifier
-        const classifier = await load();
-        
+        load();
+        let classifier = knnClassifier.create();
+
+
         async function load() {
             //can be change to other source
-           let dataset = await require('./MaskNet/model.json');
-           let tensorObj = (dataset)
-           //covert back to tensor
-           Object.keys(tensorObj).forEach((key) => {
-             tensorObj[key] = tf.tensor(tensorObj[key], [tensorObj[key].length / 1000, 1000])
-           })
-           classifier.setClassifierDataset(tensorObj);
-         }
+            let dataset = await require('./MaskNet/model.json');
+            classifier.setClassifierDataset(Object.fromEntries((dataset).map(([label, data, shape]) => [label, tf.tensor(data, shape)])));
+            console.log(classifier)
 
-        console.log(classifier)
-
-        // Predict class for the test image
-        for (let i = 1; i <= testImageCount; i++) {
-            const testImage = test.current;
-            testImage.setAttribute('src', dataUrl);
-            testImage.classList.add('test-img');
-            const tfTestImage = tf.browser.fromPixels(testImage);
-            const logits = mobilenetModule.infer(tfTestImage, 'conv_preds');
-            const prediction = await classifier.predictClass(logits);
-            console.log("num: " + i)
-            console.log(prediction.label)
+            // Predict class for the test image
+            for (let i = 1; i <= testImageCount; i++) {
+                const testImage = test.current;
+                testImage.setAttribute('src', dataUrl);
+                testImage.classList.add('test-img');
+                const tfTestImage = tf.browser.fromPixels(testImage);
+                const logits = mobilenetModule.infer(tfTestImage, 'conv_preds');
+                const prediction = await classifier.predictClass(logits);
+                console.log("num: " + i)
+                console.log(prediction.label)
+            }
         }
     }
+
+
 
 
     async function trainClassifier(mobilenetModule) {
