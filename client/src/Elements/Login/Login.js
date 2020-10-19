@@ -36,7 +36,7 @@ const Login = () => {
             if(isAuthenticated){
                 authContext.setUser(user);
                 authContext.setIsAuthenticated(isAuthenticated);
-                history.push('/todos');
+                history.push('/dashboard');
             }
         });
     }

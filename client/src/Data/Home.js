@@ -5,9 +5,9 @@ export const homeObjOne = {
   lightText: true,
   lightTextDesc: true,
   topLine: 'Maskify',
-  headline: 'Accurate and Distributed Mask Data',
+  headline: 'Live Compliance Information',
   description:
-    'We help leaders get the data they need to make the decisions we need.',
+    'We provide small businesses with all the data they need to ensure mask usage compliance.',
   buttonLabel: 'Get Started',
   imgStart: '',
   img: require('../images/maskify-landing-2.svg'),

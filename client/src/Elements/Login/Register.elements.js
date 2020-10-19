@@ -51,6 +51,7 @@ export const LoginColumn = styled.div`
     flex-basis: 100%;
     display: flex;
     justify-content: center;
+    transform: translate(0px, -200px);
   }
 
   @media screen and (min-width: 1660px) {

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import * as blazeface from '@tensorflow-models/blazeface';
 import * as tf from '@tensorflow/tfjs';
+import * as mobilenet from '@tensorflow-models/mobilenet';
 
 import Img from '../../DemoImages/Samples/33.jpg'
 
@@ -69,6 +70,11 @@ export default function Demo() {
             console.log('no people identified')
         }
     }
+
+    async function getMask() {
+
+    }
+
     return (
         <>
             <h1>demo page</h1>
@@ -78,7 +84,7 @@ export default function Demo() {
                 ref={canvas}
             />
             <div className="cropDiv">
-                {src ? src.map((src, index) => <img key={index} src={src}></img>) : null}
+                {src ? src.map((src, index) => <img class="test-img" key={index} src={src}></img>) : null}
             </div>
         </>
     )
