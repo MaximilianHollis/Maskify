@@ -9,13 +9,12 @@ https://docs.google.com/presentation/...
 
 
 
-TIMELINE:
-MUST BE FINISHED BY OCT 19.
+FINISHED!
 
+100% Completetion for Beta version
 TODO:
 Implement UI: 100%
 Implement API: 100%
 Implement Database: 100%
 Implement AI: 100%
 
-FINISHED!
