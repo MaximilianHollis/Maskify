@@ -5,6 +5,7 @@ const passportConfig = require('../passport');
 const JWT = require('jsonwebtoken');
 const User = require('../models/User');
 const Todo = require('../models/Todo');
+const Data = require('../models/Data');
 var cors = require('cors')
 
 userRouter.use(cors({ origin: 'http://localhost:3000' }));
@@ -72,6 +73,24 @@ userRouter.post('/todo', passport.authenticate('jwt', { session: false }), (req,
     })
 });
 
+userRouter.post('/data', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const data = new Data(req.body);
+    console.log(data)
+    data.save(err => {
+        if (err)
+            res.status(500).json({ message: { msgBody: "Error has occured", msgError: true } });
+        else {
+            req.user.datas.push(data);
+            req.user.save(err => {
+                if (err)
+                    res.status(500).json({ message: { msgBody: "Error has occured", msgError: true } });
+                else
+                    res.status(200).json({ message: { msgBody: "Successfully created data node", msgError: false } });
+            });
+        }
+    })
+});
+
 userRouter.get('/todos', passport.authenticate('jwt', { session: false }), (req, res) => {
     User.findById({ _id: req.user._id }).populate('todos').exec((err, document) => {
         if (err) {
@@ -79,6 +98,17 @@ userRouter.get('/todos', passport.authenticate('jwt', { session: false }), (req,
         }
         else {
             res.status(200).json({ todos: document.todos, authenticated: true });
+        }
+    });
+});
+
+userRouter.get('/datas', passport.authenticate('jwt', { session: false }), (req, res) => {
+    User.findById({ _id: req.user._id }).populate('datas').exec((err, document) => {
+        if (err) {
+            res.status(500).json({ message: { msgBody: "Error has occured", msgError: true } });
+        }
+        else {
+            res.status(200).json({ datas: document.datas, authenticated: true });
         }
     });
 });

@@ -8,7 +8,11 @@ import DataService from '../../Services/DataService';
 import { AuthContext } from '../../Context/AuthContext';
 
 
-import Img from '../../DemoImages/Samples/1.jpg'
+import Img from '../../DemoImages/Test/2.jpg'
+import Img2 from '../../DemoImages/Test/2.jpg'
+import Img3 from '../../DemoImages/Test/3.jpg'
+import Img4 from '../../DemoImages/Test/4.jpg'
+import Img5 from '../../DemoImages/Test/5.jpg'
 
 const Clipper = require('image-clipper');
 
@@ -19,6 +23,7 @@ export default function Demo() {
     const [src, setSrc] = useState([]);
 
 
+    let i = 1;
 
     const handleCanvas = (image) => {
         const canvasObj = canvas.current;
@@ -61,6 +66,7 @@ export default function Demo() {
                 ctx.lineWidth = "6";
                 ctx.strokeStyle = "red";
                 ctx.font = '25px serif';
+                ctx.fillStyle = "red";
                 ctx.rect(start[0], start[1], size[0], size[0]);
                 ctx.stroke();
 
@@ -87,7 +93,7 @@ export default function Demo() {
 
 
         async function load() {
-            //Get dataset from file and conver to tensors
+            //Get dataset from file and convert to tensors
             let dataset = await require('./MaskNet/model.json');
             classifier.setClassifierDataset(Object.fromEntries((dataset).map(([label, data, shape]) => [label, tf.tensor(data, shape)])));
 
