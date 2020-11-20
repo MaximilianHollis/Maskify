@@ -9,7 +9,7 @@ https://docs.google.com/document/d/1h_wFdZ713m9m_QAjm0UoSHm5_rWxlL0cmkxtMo60Pf4/
 https://docs.google.com/presentation/d/1y1CFxQdyo1LghUGYycyGh74P24hAulsfDershGB9LTs/edit#slide=id.p
 
 
-FINISHED!
+Beta FINISHED! Full Release under consideration.
 
 100% Completetion for Beta version
 TODO:
