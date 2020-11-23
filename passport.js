@@ -14,7 +14,7 @@ const cookieExtractor = req => {
 // authorization 
 passport.use(new JwtStrategy({
     jwtFromRequest: cookieExtractor,
-    //MUST BE CHANGED BEFORE DEVELOPMENT
+    //MUST BE CHANGED BEFORE PRODUCTION DEPLOYMENT
     secretOrKey: "Maskify"
 }, (payload, done) => {
     User.findById({ _id: payload.sub }, (err, user) => {
